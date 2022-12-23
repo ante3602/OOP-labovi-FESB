@@ -56,3 +56,62 @@ void iarray::init(const int *array, int size)
         }
     }
 }
+
+iarray &iarray::operator=(const iarray &niz)
+{
+    if (m_size != niz.m_size)
+    {
+        cout << "ERROR!" << endl;
+        exit(0);
+    }
+
+    m_arr = niz.m_arr;
+
+    return *this;
+}
+
+int &iarray::operator[](int index)
+{
+    if (index > m_size)
+    {
+        cout << "ERROR!" << endl;
+        exit(0);
+    }
+
+    return m_arr[index];
+}
+
+int main()
+{
+    iarray a;
+    cout << "Niz a:" << endl;
+    for (int i = 0; i < a.size(); i++)
+    {
+        cout << a[i] << endl;
+    }
+
+    cout << "Unesite dimenziju:" << endl;
+    int m_velicina;
+    cin >> m_velicina;
+
+    cout << "Unesite elemente:" << endl;
+    int *m_niz = new int[m_velicina];
+    for (int i = 0; i < m_velicina; i++)
+    {
+        cin >> m_niz[i];
+    }
+
+    iarray b(m_niz, m_velicina);
+    cout << "Niz b:" << endl;
+    for (int i = 0; i < b.size(); i++)
+    {
+        cout << b[i] << endl;
+    }
+
+    cout << "Izjednacavanje!" << endl;
+    a = b;
+    for (int i = 0; i < a.size(); i++)
+    {
+        cout << a[i] << endl;
+    }
+}
